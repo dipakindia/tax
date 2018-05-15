@@ -18,8 +18,11 @@
 <link rel="stylesheet" href="./html_data/datepicker.min.css">
 <link rel="stylesheet" href="./html_data/datepicker3.min.css">
 <script src="./html_data/bootstrap-datepicker.min.js.download"></script>
-<script language="JavaScript" type="text/javascript">$(document).ready(function(){$('#tax_from').datepicker({format:'dd/mm/yyyy'})
-$('#tax_to').datepicker({format:'dd/mm/yyyy'})});</script>
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function(){
+  $('#tax_from').datepicker({format:'dd/mm/yyyy'});
+  $('#tax_to').datepicker({format:'dd/mm/yyyy'});
+});</script>
 <title>Admin</title>
 </head>
 <body class="">
@@ -282,10 +285,66 @@ $('#tax_to').datepicker({format:'dd/mm/yyyy'})});</script>
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<script>function formatRegNo(){var x=$('#reg_no').val();x=x.replace(/[^A-Za-z0-9]/gi,'');x=x.toUpperCase();$('#reg_no').val(x);getVehicleDetails(x);}
-function printChalan(){var rcpt_no=$('#receipt-no').val();$.ajax({type:"POST",url:'search.php',data:{"rcpt_no":rcpt_no},success:function(response){var id=response;if(id!=''){window.location='/tax/print.php?id='+id;}
-else{alert('No Chalan found! Please check receipt number');}}});}
-function getVehicleDetails(reg_no){$("#wait").css("display","block");$.ajax({type:"POST",url:'search.php',data:{"reg_no":reg_no},success:function(response){$("#wait").css("display","none");resetFields('false');var data=JSON.parse(response);document.getElementById("fname").value=data.owner_name;document.getElementById("chassis_no").value=data.chassis_number;document.getElementById("weight").value=data.laden_weight;document.getElementById("vehicle_type").value=data.type;document.getElementById("vehicle_class").value=data.class;document.getElementById("service_type").value=data.service_type;document.getElementById("seat_capacity").value=data.sitting;}});}
-function resetFields(status){document.getElementById("fname").value="";document.getElementById("chassis_no").value="";document.getElementById("weight").value="1540 KG";document.getElementById("vehicle_type").value="";document.getElementById("vehicle_class").value="";document.getElementById("service_type").value="";document.getElementById("seat_capacity").value="";document.getElementById("fname").readOnly=false;document.getElementById("chassis_no").readOnly=false;document.getElementById("weight").readOnly=false;document.getElementById("vehicle_type").readOnly=false;document.getElementById("vehicle_class").readOnly=false;document.getElementById("service_type").readOnly=false;document.getElementById("seat_capacity").readOnly=false;}</script>
+<script>
+function formatRegNo(){ 
+  var x=$('#reg_no').val();
+  x=x.replace(/[^A-Za-z0-9]/gi,'');
+  x=x.toUpperCase();
+  $('#reg_no').val(x);
+  getVehicleDetails(x);
+}
+function printChalan(){ 
+  var rcpt_no=$('#receipt-no').val();
+  $.ajax({
+    type:"POST",
+    url:'search.php',
+    data:{"rcpt_no":rcpt_no},
+    success:function(response){
+      var id=response;
+      if(id!=''){
+        window.location='/tax/print.php?id='+id;
+      }else{
+        alert('No Chalan found! Please check receipt number');
+      }
+    }
+  });
+}
+function getVehicleDetails(reg_no){
+  $("#wait").css("display","block");
+  $.ajax({
+    type:"POST",
+    url: 'search.php',
+    data: { "reg_no":reg_no },
+    success: function(response){
+      $("#wait").css("display","none");
+      resetFields('false');
+      var data = JSON.parse(response);
+      document.getElementById("fname").value=data.owner_name;
+      document.getElementById("chassis_no").value=data.chassis_number;
+      document.getElementById("weight").value=data.laden_weight;
+      document.getElementById("vehicle_type").value=data.type;
+      document.getElementById("vehicle_class").value=data.class;
+      document.getElementById("service_type").value=data.service_type;
+      document.getElementById("seat_capacity").value=data.sitting;
+    }
+  });
+}
+function resetFields(status){
+  document.getElementById("fname").value="";
+  document.getElementById("chassis_no").value="";
+  document.getElementById("weight").value="1540 KG";
+  document.getElementById("vehicle_type").value="";
+  document.getElementById("vehicle_class").value="";
+  document.getElementById("service_type").value="";
+  document.getElementById("seat_capacity").value="";
+  document.getElementById("fname").readOnly=false;
+  document.getElementById("chassis_no").readOnly=false;
+  document.getElementById("weight").readOnly=false;
+  document.getElementById("vehicle_type").readOnly=false;
+  document.getElementById("vehicle_class").readOnly=false;
+  document.getElementById("service_type").readOnly=false;
+  document.getElementById("seat_capacity").readOnly=false;
+}
+</script>
 </body>
 </html>
