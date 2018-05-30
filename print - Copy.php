@@ -8,7 +8,7 @@
     <title>Online Tax Payment Portal</title>
     <style>.hed-bot{padding:5px 20px 0 10px;border:none}.hed-right{font-size:14px;font-weight:bold;line-height:25px;padding:0 20px 0 10px}.row-p{padding-top:5px;font-size:13px;font-family:Geneva,Arial,Helvetica,sans-serif}</style>
 </head>
-<body onLoad="window.print();" data-gr-c-s-loaded="true">  <!--onload="window.print();"-->
+<body onload="window.print();" data-gr-c-s-loaded="true">  <!--onload="window.print();"-->
 <div class="table-responsive"><div id="j_idt14" class="ui-outputpanel ui-widget">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody><tr valign="top">

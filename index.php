@@ -1,3 +1,25 @@
+<?php
+require('includes/config.php');
+$conn = new mysqli(SERVER_NAME, CONN_USER_NAME, CONN_PASSWORD, DB_NAME);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+if(isset($_POST['submit_form'])){
+extract($_POST);
+  $sql = $conn->query("INSERT INTO `tax_haryana`(
+    `reg_no`, `fname`, `chassis_no`, `weight`, `vehicle_type`, `vehicle_class`, `service_type`, `seat_capacity`, `mobile`, `tax_mode`, `tax_from`, `tax_from_time`, `tax_to`, `tax_to_time`, `amount`, `added_date`
+    ) VALUES (
+      '".$reg_no."','".$fname."','".$chassis_no."','".$weight."','".$vehicle_type."','".$vehicle_class."','".$service_type."','".$seat_capacity."','".$mobile."','".$tax_mode."','".$tax_from."','".$tax_from_time."','".$tax_to."','".$tax_to_time."','".$amount."','".date("Y-m-d H:i:s")."'
+    )") or die(mysqli_error());
+    if($sql){
+      echo '<script>window.location="print.php?reg_no='.$reg_no.'"</script>';
+    }else{
+      echo '<script>alert("Error")</script>';
+    }
+}
+
+?>
 <!DOCTYPE html>
 <!-- saved from url=(0035)index.php# -->
 <html lang="en">
@@ -52,7 +74,7 @@ $(document).ready(function(){
   </div>
 </nav>
 <div class="container">
-  <form class="" method="post" action="store.php">
+  <form class="" method="post" action="">
     <div class="row main main-center">
       <div class="page-header text-center">
         <h3>VEHICLE TAX PAYMENT FOR </h3>
@@ -62,7 +84,8 @@ $(document).ready(function(){
           <label for="reg_no" class="cols-sm-2 control-label">Registration Number :</label>
           <div class="cols-sm-10">
             <div class="input-group"> <span class="input-group-addon"><i class="fa fa-car fa" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" id="reg_no" name="reg_no" placeholder="Registration Number" required="" onfocusout="formatRegNo()">
+            <!--onfocusout="formatRegNo()"-->
+              <input type="text" class="form-control" id="reg_no" name="reg_no" placeholder="Registration Number" required="" >
             </div>
           </div>
         </div>
@@ -255,7 +278,7 @@ $(document).ready(function(){
       </div>
       <div class="col-sm-12">
         <div class="form-group ">
-          <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Submit</button>
+          <button type="submit" id="button" name = "submit_form" class="btn btn-primary btn-lg btn-block login-button">Submit</button>
         </div>
       </div>
     </div>
@@ -277,7 +300,7 @@ $(document).ready(function(){
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" onClick="printChalan()">Print</button>
+        <button type="submit" class="btn btn-default" data-dismiss="modal">Print</button>
       </div>
     </div>
     <!-- /.modal-content -->

@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Print PDF using Dynamic iFrame</title>
+</head>
+<body>
+    <input type="button" id="bt" onClick="print('../sample.pdf')" value="Print PDF" />
+    <iframe src="DDy4JCqSk_P-SLIP.pdf" style="display: none;" id="id-v"></iframe>
+</body>
+
+<script>
+    function print(doc) {
+        /*var objFra = document.createElement('iframe');   // CREATE AN IFRAME.
+        objFra.style.visibility = "hidden";    // HIDE THE FRAME.
+        objFra.src = doc;                      // SET SOURCE.
+        document.body.appendChild(objFra);  // APPEND THE FRAME TO THE PAGE.
+        objFra.contentWindow.focus();       // SET FOCUS.
+        objFra.contentWindow.print();      // PRINT IT.*/
+				var getMyFrame = document.getElementById('id-v');
+        getMyFrame.focus();
+        getMyFrame.contentWindow.print();
+    }
+</script>
